@@ -13,19 +13,16 @@ public class CRUDApp extends JFrame {
         setSize(750, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
-        getContentPane().setBackground(new Color(240, 240, 240)); // ตั้งค่าสีพื้นหลังหลัก
-
-        // Set Font
+        getContentPane().setBackground(new Color(240, 240, 240));
+        
         Font font = new Font("Tahoma", Font.PLAIN, 16);
 
-        // Panel หลักสำหรับ Input
         JPanel inputPanel = new JPanel(new GridBagLayout());
         inputPanel.setBorder(BorderFactory.createTitledBorder("User Details"));
         inputPanel.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(8, 8, 8, 8); // ระยะห่าง
-
-        // Labels
+        gbc.insets = new Insets(8, 8, 8, 8);
+ 
         JLabel nameLabel = new JLabel("Name:");
         nameLabel.setFont(font);
         JLabel cityLabel = new JLabel("City:");
@@ -33,7 +30,6 @@ public class CRUDApp extends JFrame {
         JLabel ageLabel = new JLabel("Age:");
         ageLabel.setFont(font);
 
-        // Text Fields
         nameField = new JTextField(10);
         nameField.setFont(font);
         cityField = new JTextField(10);
@@ -41,7 +37,6 @@ public class CRUDApp extends JFrame {
         ageField = new JTextField(5);
         ageField.setFont(font);
 
-        // ปุ่ม
         JButton addButton = new JButton("➕ Add");
         styleButton(addButton, new Color(0, 153, 255));
 
@@ -51,9 +46,7 @@ public class CRUDApp extends JFrame {
 
         deleteButton = new JButton("🗑 Delete");
         styleButton(deleteButton, new Color(255, 51, 51));
-        deleteButton.setEnabled(false);
-
-        // จัดวาง Layout ของ Label และ TextField
+     
         gbc.gridx = 0; gbc.gridy = 0; inputPanel.add(nameLabel, gbc);
         gbc.gridx = 1; inputPanel.add(nameField, gbc);
         gbc.gridx = 2; inputPanel.add(cityLabel, gbc);
@@ -61,14 +54,12 @@ public class CRUDApp extends JFrame {
         gbc.gridx = 4; inputPanel.add(ageLabel, gbc);
         gbc.gridx = 5; inputPanel.add(ageField, gbc);
 
-        // จัดวางปุ่มให้อยู่ในแนวเดียวกัน
         gbc.gridx = 0; gbc.gridy = 1; gbc.gridwidth = 2; inputPanel.add(addButton, gbc);
         gbc.gridx = 2; inputPanel.add(updateButton, gbc);
         gbc.gridx = 4; inputPanel.add(deleteButton, gbc);
 
         add(inputPanel, BorderLayout.NORTH);
 
-        // Table setup (เรียง Name → City → Age)
         tableModel = new DefaultTableModel(new String[]{"Name", "City", "Age"}, 0);
         table = new JTable(tableModel);
         table.setFont(font);
@@ -79,7 +70,6 @@ public class CRUDApp extends JFrame {
         table.setSelectionBackground(new Color(204, 229, 255));
         add(new JScrollPane(table), BorderLayout.CENTER);
 
-        // Button actions
         addButton.addActionListener(e -> {
             if (validateFields()) {
                 tableModel.addRow(new Object[]{nameField.getText(), cityField.getText(), ageField.getText()});
@@ -123,7 +113,6 @@ public class CRUDApp extends JFrame {
         });
     }
 
-    // ฟังก์ชันปรับแต่งปุ่มให้สวยขึ้น
     private void styleButton(JButton button, Color color) {
         button.setBackground(color);
         button.setForeground(Color.WHITE);
